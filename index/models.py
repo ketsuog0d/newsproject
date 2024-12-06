@@ -6,7 +6,7 @@ class NewsCategory(models.Model):
     update_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата обновления')
 
     def __str__(self):
-        return
+        return str(self.category_name)
 
 class News(models.Model):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
@@ -16,4 +16,4 @@ class News(models.Model):
     update_data = models.DateTimeField(auto_now_add=True, verbose_name='Дата обновления')
 
     def __str__(self):
-        return self.title
+        return str(self.title)
