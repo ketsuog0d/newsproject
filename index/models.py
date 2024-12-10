@@ -9,9 +9,9 @@ class NewsCategory(models.Model):
         return str(self.category_name)
 
 class News(models.Model):
-    title = models.CharField(max_length=256, verbose_name='Заголовок')
-    content = models.TextField(verbose_name='Основной текст')
-    category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, related_name='news',
+    news_title = models.CharField(max_length=256, verbose_name='Заголовок')
+    news_content = models.TextField(verbose_name='Основной текст')
+    news_category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, related_name='news',
                                  verbose_name='Категория')
     update_data = models.DateTimeField(auto_now_add=True, verbose_name='Дата обновления')
 

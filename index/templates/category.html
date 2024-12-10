@@ -2,11 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title>{{ category }}</title>
 </head>
 <body>
+<h1>{{ category }}</h1>
+<hr>
 {% for n in news %}
-<p>{{ n.news_title }}</p>
+<h3><a href="/news/{{ n.id }}">{{ n.news_title }}</a></h3>
 <br>
 {% endfor %}
 </body>
