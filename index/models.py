@@ -16,4 +16,4 @@ class News(models.Model):
     update_data = models.DateTimeField(auto_now_add=True, verbose_name='Дата обновления')
 
     def __str__(self):
-        return str(self.title)
+        return str(self.news_title)
