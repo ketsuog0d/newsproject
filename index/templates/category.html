@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category }}</title>
+</head>
+<body class="bg bg-light">
+<div class="container">
+ <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+        <a class="link-secondary" href="#">Подпишись</a>
+      </div>
+      <div class="col-4 text-center">
+        <h1><a class="blog-header-logo text-dark" href="/">ketsuonews</a></h1>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <a class="link-secondary" href="#" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
+        </a>
+        <a class="btn btn-sm btn-outline-secondary" href="#">Войти</a>
+      </div>
+    </div>
+<hr>
+<div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      {% for c in categories %}
+      <a class="p-2 link-secondary" href="/category/{{ c.id }}">{{ c }}</a>
+      <br>
+      {% endfor %}
+    </nav>
+</div>
+</header>
+<div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    {% for n in news %}
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ category }}</strong>
+          <h3 class="mb-0"><a href="/news/{{ n.id }}">{{ n.news_title }}</a></h3>
+          <p class="card-text mb-auto">{{ n.news_content|truncatewords:20 }}</p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="{{ n.news_photo.url }}" class="bd-placeholder-img" width="330" height="100" alt="{{ n.news_title }}">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+      </div>
+</div>
+</body>
+</html>
