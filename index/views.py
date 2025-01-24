@@ -55,3 +55,14 @@ class Register(View):
 
         context = {'form': RegForm, 'message': 'Пароль или почта неверны!'}
         return render(request, self.template_name, context)
+
+
+def search(request):
+    if request.method == 'POST':
+        get_news = request.POST.get('search')
+
+        if News.objects.get(news_title__iregex=get_news):
+            searched_news = News.objects.get(news_title__iregex=get_news)
+            return redirect(f'/news/{searched_news.id}')
+        else:
+            return redirect('/')
