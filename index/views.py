@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import NewsCategory, News
+from .forms import RegForm
+from django.views import View
+from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -24,3 +28,30 @@ def news_page(request, pk):
     context = {'news': news}
 
     return render(request, 'news.html', context)
+
+class Register(View):
+    template_name = 'registration/register.html'
+
+    def get(self, request):
+        context = {'form': RegForm}
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = RegForm(request.POST)
+
+        if form.is_valid():
+            username = form.clean_username()
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password2')
+
+            user = User.objects.create_user(username=username,
+                                            email=email,
+                                            password=password)
+            user.save()
+
+
+            login(request, user)
+            return redirect('/')
+
+        context = {'form': RegForm, 'message': 'Пароль или почта неверны!'}
+        return render(request, self.template_name, context)
