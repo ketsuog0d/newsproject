@@ -66,3 +66,10 @@ def search(request):
             return redirect(f'/news/{searched_news.id}')
         else:
             return redirect('/')
+
+
+def logout_views(request):
+    logout(request)
+    return redirect('/')
+
+
